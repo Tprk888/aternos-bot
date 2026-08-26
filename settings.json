@@ -1,7 +1,7 @@
 {
-  "name": "AFK Bot",
+  "name": "Toporak Bots",
   "bot-account": {
-    "username": "YourBotUsername",
+    "username": "ToporakBot",
     "password": "",
     "type": "offline"
   },
@@ -29,10 +29,10 @@
     "chat-messages": {
       "enabled": true,
       "repeat": true,
-      "repeat-delay": 120,
+      "repeat-delay": 380,
       "messages": [
-        "I'm a regular player",
-        "I like to play Minecraft!"
+        "mc.toporak.com websitesini ziyaret etmeyi unutmayın!",
+        "Sunucu gözetimim altında!"
       ]
     },
     "chat-log": true,
@@ -82,6 +82,6 @@
   },
   "chat": {
     "respond": true,
-    "tpWhitelist": ["YourMinecraftUsername"]
+    "tpWhitelist": ["Tprk88"]
   }
 }
