@@ -6,8 +6,8 @@
     "type": "offline"
   },
   "server": {
-    "ip": "your.server.ip",
-    "port": 25565,
+    "ip": "tprk88.aternos.me",
+    "port": 18257,
     "version": "",
     "try-creative": false
   },
