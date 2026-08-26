@@ -9,7 +9,7 @@
     "ip": "tprk88.aternos.me",
     "port": 18257,
     "version": "",
-    "try-creative": false
+    "try-creative": true
   },
   "position": {
     "enabled": true,
