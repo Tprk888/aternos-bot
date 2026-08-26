@@ -6,10 +6,10 @@
     "type": "offline"
   },
   "server": {
-    "ip": "tprk88.aternos.me",
+    "ip": "tprk88.aternos.me:18257",
     "port": 18257,
     "version": "",
-    "try-creative": true
+    "try-creative": false
   },
   "position": {
     "enabled": true,
@@ -19,7 +19,7 @@
   },
   "utils": {
     "auto-auth": {
-      "enabled": false,
+      "enabled": true,
       "password": "YourAuthPassword"
     },
     "anti-afk": {
