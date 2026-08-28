@@ -29,7 +29,7 @@
     "chat-messages": {
       "enabled": true,
       "repeat": true,
-      "repeat-delay": 380,
+      "repeat-delay": 5,
       "messages": [
         "/register Toporakbots88 Toporakbots88",
         "mc.toporak.com websitesini ziyaret etmeyi unutmayın!",
