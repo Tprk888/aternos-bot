@@ -7,7 +7,7 @@
   },
   "server": {
     "ip": "play.toporak.com",
-    "port": 18257,
+    "port": 25188,
     "version": "",
     "try-creative": false
   },
