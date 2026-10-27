@@ -6,9 +6,9 @@
     "type": "offline"
   },
   "server": {
-    "ip": "play.toporak.com",
+    "ip": "Maiwas0.aternos.me",
     "port": 25188,
-    "version": "",
+    "version": "1.21.11",
     "try-creative": false
   },
   "position": {
