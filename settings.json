@@ -1,14 +1,14 @@
 {
-  "name": "Toporak Bots",
+  "name": "Toporak Bot",
   "bot-account": {
     "username": "ToporakBot",
     "password": "",
     "type": "offline"
   },
   "server": {
-    "ip": "mc.toporak.com",
+    "ip": "play.toporak.com",
     "port": 18257,
-    "version": "",
+    "version": "1.21.11",
     "try-creative": false
   },
   "position": {
@@ -19,8 +19,8 @@
   },
   "utils": {
     "auto-auth": {
-      "enabled": true,
-      "password": "Toporakbots88"
+      "enabled": false,
+      "password": ""
     },
     "anti-afk": {
       "enabled": true,
@@ -31,7 +31,7 @@
       "repeat": true,
       "repeat-delay": 388,
       "messages": [
-        "mc.toporak.com websitesini ziyaret etmeyi unutmayın!",
+        "Toporak yaparsa kaliteli yapar!",
         "Sunucu gözetimim altında!",
         "Dünyanın en gelişmiş yapay zeka asistanı:Toporak AI ! Hemen deneyin. ai.toporak.com"
       ]
