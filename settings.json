@@ -29,7 +29,7 @@
     "chat-messages": {
       "enabled": true,
       "repeat": true,
-      "repeat-delay": 388,
+      "repeat-delay": 188,
       "messages": [
         "Toporak yaparsa kaliteli yapar!",
         "Sunucu gözetimim altında!",
@@ -70,15 +70,15 @@
   },
   "beds": {
     "pick-up-day": false,
-    "place-night": false
+    "place-night": true
   },
   "discord": {
-    "enabled": false,
-    "webhookUrl": "YOUR_DISCORD_WEBHOOK_URL_HERE",
+    "enabled": true,
+    "webhookUrl": "https://discord.com/api/webhooks/1564695363372454008/558_6pS2uKpvCiE-jDzsOBcvXJe_-6uKoVdo1VlE6CFyr9bHqQwlGzze0O-wwMLsmyfm",
     "events": {
       "connect": true,
       "disconnect": true,
-      "chat": false
+      "chat": true
     }
   },
   "chat": {
