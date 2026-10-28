@@ -83,6 +83,11 @@
   },
   "chat": {
     "respond": true,
-    "tpWhitelist": ["Tprk88"]
+    "tpWhitelist": [
+      "Tprk88"
+    ],
+    "commandWhitelist": [
+      "Tprk88"
+    ]
   }
 }
