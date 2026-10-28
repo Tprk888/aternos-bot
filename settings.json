@@ -85,9 +85,6 @@
     "respond": true,
     "tpWhitelist": [
       "Tprk88"
-    ],
-    "commandWhitelist": [
-      "Tprk88"
     ]
   }
 }
