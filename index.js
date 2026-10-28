@@ -830,133 +830,31 @@ function bedModule(bot, mcData) {
 }
 
 function chatModule(bot) {
-  const commandWhitelist = (config.chat?.commandWhitelist || ['Tprk88'])
-    .map(name => String(name).toLowerCase());
-  const tpWhitelist = (config.chat?.tpWhitelist || ['Tprk88'])
-    .map(name => String(name).toLowerCase());
+
+  const tpWhitelist = config.chat?.tpWhitelist || [];
 
   bot.on('chat', (username, message) => {
     if (!bot || username === bot.username) return;
 
     try {
       if (config.discord?.enabled && config.discord?.events?.chat) {
-        sendDiscordWebhook(username + ': ' + message, 0x7289da);
+        sendDiscordWebhook(`${username}: ${message}`, 0x7289da);
       }
 
-      if (!config.chat?.respond || !message.startsWith('!')) return;
-
-      const parts = message.trim().split(/\s+/);
-      const command = parts[0].toLowerCase();
-      const args = parts.slice(1);
-
-      if (!commandWhitelist.includes(username.toLowerCase())) {
-        console.log('[Chat] Ignored command from untrusted user: ' + username);
-        return;
-      }
-
-      const pos = bot.entity?.position;
-      const coords = pos
-        ? Math.floor(pos.x) + ', ' + Math.floor(pos.y) + ', ' + Math.floor(pos.z)
-        : 'unknown';
-
-      switch (command) {
-        case '!help':
-        case '!commands':
-          bot.chat('Commands: !status !pos !health !food !players !time !inv !xp !ping !tp <player>');
-          break;
-
-        case '!status': {
-          const playerCount = Object.values(bot.players || {})
-            .filter(player => player && player.entity).length;
-          const hp = Number.isFinite(bot.health) ? bot.health : '?';
-          const food = Number.isFinite(bot.food) ? bot.food : '?';
-          bot.chat('Bot: ' + (botState.connected ? 'Online' : 'Offline') +
-            ' | HP: ' + hp + '/20 | Food: ' + food + '/20 | Pos: ' + coords +
-            ' | Nearby players: ' + playerCount);
-          break;
+      if (config.chat?.respond) {
+        const lowerMsg = message.toLowerCase();
+        if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
+          bot.chat(`Hello, ${username}!`);
         }
 
-        case '!pos':
-        case '!coords':
-        case '!where':
-          bot.chat('Bot coordinates: ' + coords);
-          break;
-
-        case '!health':
-        case '!hp':
-          bot.chat('Health: ' + (Number.isFinite(bot.health) ? bot.health : '?') + '/20');
-          break;
-
-        case '!food':
-          bot.chat('Food: ' + (Number.isFinite(bot.food) ? bot.food : '?') + '/20');
-          break;
-
-        case '!players': {
-          const players = Object.values(bot.players || {})
-            .filter(player => player && player.entity && player.username !== bot.username)
-            .map(player => player.username);
-          bot.chat(players.length
-            ? 'Nearby players (' + players.length + '): ' +
-              players.slice(0, 8).join(', ') + (players.length > 8 ? ', ...' : '')
-            : 'No other players currently visible to the bot.');
-          break;
-        }
-
-        case '!time': {
-          const ticks = bot.time?.timeOfDay;
-          if (!Number.isFinite(ticks)) {
-            bot.chat('Minecraft time is not available right now.');
+        if (message.startsWith('!tp ')) {
+          if (tpWhitelist.includes(username)) {
+            const target = message.split(' ')[1];
+            if (target) bot.chat(`/tp ${target}`);
           } else {
-            const shiftedTicks = (ticks + 6000) % 24000;
-            const hour = Math.floor(shiftedTicks / 1000);
-            const minute = Math.floor(((shiftedTicks % 1000) * 60) / 1000);
-            bot.chat('Minecraft time: ' + String(hour).padStart(2, '0') + ':' +
-              String(minute).padStart(2, '0') + ' (' + ticks + ' ticks)');
+            console.log(`[Chat] Ignored !tp from untrusted user: ${username}`);
           }
-          break;
         }
-
-        case '!inv':
-        case '!inventory': {
-          const items = bot.inventory.items();
-          if (!items.length) {
-            bot.chat('Inventory is empty.');
-          } else {
-            const summary = items.slice(0, 5)
-              .map(item => item.name + ' x' + item.count).join(', ');
-            bot.chat('Inventory: ' + summary + (items.length > 5 ? ', ...' : ''));
-          }
-          break;
-        }
-
-        case '!xp':
-        case '!level':
-          bot.chat('XP level: ' + (bot.experience?.level ?? '?') +
-            ' | Total XP: ' + (bot.experience?.points ?? '?'));
-          break;
-
-        case '!ping':
-          bot.chat('Bot response OK | Connection: ' +
-            (botState.connected ? 'online' : 'offline'));
-          break;
-
-        case '!tp': {
-          if (!tpWhitelist.includes(username.toLowerCase())) {
-            bot.chat('You are not allowed to use !tp.');
-            console.log('[Chat] Ignored !tp from untrusted user: ' + username);
-            break;
-          }
-          const target = args[0];
-          if (!target || !/^[A-Za-z0-9_]{1,16}$/.test(target)) {
-            bot.chat('Usage: !tp <player>');
-            break;
-          }
-          bot.chat('/tp ' + target);
-          break;
-        }
-
-        default:
-          bot.chat('Unknown command. Use !help.');
       }
     } catch (e) {
       console.log('[Chat] Error:', e.message);
