@@ -830,7 +830,6 @@ function bedModule(bot, mcData) {
 }
 
 function chatModule(bot) {
-
   const tpWhitelist = config.chat?.tpWhitelist || [];
 
   bot.on('chat', (username, message) => {
@@ -843,37 +842,37 @@ function chatModule(bot) {
 
       if (config.chat?.respond) {
         const lowerMsg = message.toLowerCase();
+
         if (lowerMsg.includes('hello') || lowerMsg.includes('hi')) {
           bot.chat(`Hello, ${username}!`);
         }
-        if (config.chat?.respond) {
-        const lowerMsg = message.toLowerCase();
+
         if (lowerMsg.includes('sa') || lowerMsg.includes('merhaba')) {
           bot.chat(`Merhaba, ${username}!`);
         }
 
-        if (config.chat?.respond) {
-        const lowerMsg = message.toLowerCase();
         if (lowerMsg.includes('toprak') || lowerMsg.includes('topitop')) {
           bot.chat(`Toprak: 1000+ aura Berat: 0 aura ${username}!`);
-        }  
-
-        if (message.startsWith('!tp ')) {
-          if (tpWhitelist.includes(username)) {
-            const target = message.split(' ')[1];
-            if (target) bot.chat(`/tp ${target}`);
-          } else {
-            console.log(`[Chat] Ignored !tp from untrusted user: ${username}`);
-          }
         }
-        if (message.startsWith('!durum')) {
-          if (tpWhitelist.includes(username)) {
-            const target = message.split(' ')[1];
-            if (target) bot.chat(`Durum Mükemmel!Aynı Toporak gibi.`);
-          } else {
-            console.log(`[Chat] HAHA! KENDİNİ ADMİN Mİ SANDIN ?  ${username}`);
+      }
+
+      if (message.startsWith('!tp ')) {
+        if (tpWhitelist.includes(username)) {
+          const target = message.split(/\s+/)[1];
+          if (target) {
+            bot.chat(`/tp ${target}`);
           }
-        }  
+        } else {
+          console.log(`[Chat] Ignored !tp from untrusted user: ${username}`);
+        }
+      }
+
+      if (message.trim() === '!durum') {
+        if (tpWhitelist.includes(username)) {
+          bot.chat('Durum mükemmel! Bot çalışıyor.');
+        } else {
+          console.log(`[Chat] Unauthorized !durum attempt from: ${username}`);
+        }
       }
     } catch (e) {
       console.log('[Chat] Error:', e.message);
