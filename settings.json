@@ -6,7 +6,7 @@
     "type": "offline"
   },
   "server": {
-    "ip": "play.toporak.com",
+    "ip": "m.toporak.com",
     "port": 25188,
     "version": "",
     "try-creative": false
